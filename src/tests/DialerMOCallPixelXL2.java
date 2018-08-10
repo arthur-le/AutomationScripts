@@ -29,7 +29,7 @@ import io.appium.java_client.android.AndroidDriver;
  * set number of times.
  */
 
-public class DialerMOCallSnowbird {
+public class DialerMOCallPixelXL2 {
 	
 	private static int counter = 0;
 	
