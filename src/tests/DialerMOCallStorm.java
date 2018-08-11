@@ -32,7 +32,7 @@ import io.appium.java_client.android.AndroidDriver;
  * set number of times.
  */
 
-public class DialerMOCallV30 {
+public class DialerMOCallStorm {
 	
 	private static int counter = 0;
 	
@@ -47,9 +47,9 @@ public class DialerMOCallV30 {
 			caps.setCapability("deviceName", "My Phone");
 			
 			//Phone id acquired through ADB
-			caps.setCapability("udid", "LGH9310a940009"); 
+			caps.setCapability("udid", "LMV405UAe4c83622"); 
 			caps.setCapability("platformName", "Android");
-			caps.setCapability("platformVersion", "8.0.0");
+			caps.setCapability("platformVersion", "8.1.0");
 			
 			//Open google dialer com.google.androidr.dialer
 			caps.setCapability("appPackage", "com.lge.launcher3");
@@ -69,10 +69,18 @@ public class DialerMOCallV30 {
 				System.out.println(e.getMessage());
 			}
 			
+			WebDriverWait wait = new WebDriverWait(driver, 40);
+
 			
-			//close and relaunch phone to get desired scenario
+			
+			//launch phone dialer
+			//issue here. Must wait for phone app to be clickable
+			System.out.println("Phone app should be launching now from main");
+			
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.TextView[@content-desc='Phone']")));
 			driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"Phone\")")).click();
-		
+	
+			
 			//Flags if call was ended. 0 is not ended yet
 			int flag = 0;
 			
@@ -86,11 +94,10 @@ public class DialerMOCallV30 {
 			}
 			catch(Exception e)
 			{
-				System.out.println("Error occured. Restarting main");
+				System.out.println("Error ending call. Restarting main");
 				String[] args1 = {};
 				main(args1);
 			}
-			
 			
 			
 			
@@ -111,7 +118,7 @@ public class DialerMOCallV30 {
 			}
 			catch(Exception e)
 			{
-				System.out.println("Error occured. Restarting main");
+				System.out.println("Error making MO call. Restarting main");
 				String[] args1 = {};
 				main(args1);
 			}
@@ -124,16 +131,21 @@ public class DialerMOCallV30 {
 	
 	private static void makeMOCalls(AppiumDriver<MobileElement> driver, DesiredCapabilities caps)
 	{
+		System.out.println("starting MO call method");
 		//wait time set to 45 seconds
 		WebDriverWait wait = new WebDriverWait(driver, 40);
 	
-		//Must open dialer again if call was ended		
+	
+		//launch phone dialer
+		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"Phone\")")).click();
+		
 		
 		//MAKE FIRST MO CALL TO TEST PHONE SERVERS
 		//Tap on the Dial tab
 		driver.findElement(MobileBy.AndroidUIAutomator(
 				"new UiScrollable(new UiSelector().resourceId(\" \")).scrollIntoView("
 				+ "new UiSelector().text(\"Dial\"))")).click();
+
 		
 		//Calling echo script number
 		//Select each key and dial a number
@@ -183,15 +195,15 @@ public class DialerMOCallV30 {
 		//Wait for 2nd MO call to connect. Waiting 45 seconds for merge to appear
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/hierarchy/android.widget.FrameLayout/"
 				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/"
-				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/"
-				+ "android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.Button[@text='Merge calls']")));
+				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/"
+				+ "android.widget.FrameLayout[1]/android.widget.Button[@text='Merge calls']")));
 
 		
 		//Click on merge button once appeared
 		driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/"
 				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/"
-				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/"
-				+ "android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.Button[@text='Merge calls']")).click();
+				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/"
+				+ "android.widget.FrameLayout[1]/android.widget.Button[@text='Merge calls']")).click();
 		
 		//Let conference call run for 20 seconds and then hit end call
 		try 
@@ -231,7 +243,7 @@ public class DialerMOCallV30 {
 		}
 		return flag;
 	}
-	p
+	
 	
 	public int getCounter()
 	{
