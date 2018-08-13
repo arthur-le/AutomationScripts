@@ -69,16 +69,23 @@ public class DialerMOCallStorm {
 				System.out.println(e.getMessage());
 			}
 			
-			WebDriverWait wait = new WebDriverWait(driver, 40);
-
+			WebDriverWait wait = new WebDriverWait(driver, 10);
 			
+			try 
+			{
+				//must wait for phone app to be clickable after restart.
+				//wait for folder and phone app onscreen element to be clickable before proceeded after the restart
+				wait.until(ExpectedConditions.elementToBeClickable(By.className("android.widget.TextView")));		
+				driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"Phone\")")).click();
+			}
+			catch(Exception e)
+			{
+				System.out.println("Error. Restarting main");
+				driver.closeApp();
+				String[] args1 = {};
+				main(args1);
+			}
 			
-			//launch phone dialer
-			//issue here. Must wait for phone app to be clickable
-			System.out.println("Phone app should be launching now from main");
-			
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.TextView[@content-desc='Phone']")));
-			driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"Phone\")")).click();
 	
 			
 			//Flags if call was ended. 0 is not ended yet
@@ -95,6 +102,7 @@ public class DialerMOCallStorm {
 			catch(Exception e)
 			{
 				System.out.println("Error ending call. Restarting main");
+				driver.closeApp();
 				String[] args1 = {};
 				main(args1);
 			}
@@ -115,10 +123,12 @@ public class DialerMOCallStorm {
 					//Make MO calls
 					makeMOCalls(driver, caps);
 				}
+				driver.closeApp();
 			}
 			catch(Exception e)
 			{
 				System.out.println("Error making MO call. Restarting main");
+				driver.closeApp();
 				String[] args1 = {};
 				main(args1);
 			}
@@ -239,7 +249,7 @@ public class DialerMOCallStorm {
 			//hit the end call button once to end call
 			driver.findElement(By.id("com.android.incallui:id/endButton")).click();
 			flag = 1;	
-			System.out.println("Call had been ended now");
+			System.out.println("Call had been ended now. Restarting Main.");
 		}
 		return flag;
 	}
