@@ -73,7 +73,7 @@ public class DialerMOCallStorm {
 			
 			try 
 			{
-				//must wait for phone app to be clickable after restart.p
+				//must wait for phone app to be clickable after restart
 				//wait for folder and phone app onscreen elements to be clickable before proceeded after the restart
 				wait.until(ExpectedConditions.elementToBeClickable(By.className("android.widget.TextView")));		
 				driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"Phone\")")).click();
