@@ -69,18 +69,18 @@ public class DialerMOCallStorm {
 				System.out.println(e.getMessage());
 			}
 			
-			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebDriverWait wait = new WebDriverWait(driver, 15);
 			
 			try 
 			{
-				//must wait for phone app to be clickable after restart.
-				//wait for folder and phone app onscreen element to be clickable before proceeded after the restart
+				//must wait for phone app to be clickable after restart.p
+				//wait for folder and phone app onscreen elements to be clickable before proceeded after the restart
 				wait.until(ExpectedConditions.elementToBeClickable(By.className("android.widget.TextView")));		
 				driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"Phone\")")).click();
 			}
 			catch(Exception e)
 			{
-				System.out.println("Error. Restarting main");
+				System.out.println("Error in waiting for phone app to be clickable. Restarting main");
 				driver.closeApp();
 				String[] args1 = {};
 				main(args1);
