@@ -141,9 +141,12 @@ public class DialerMOCallStorm {
 	
 	private static void makeMOCalls(AppiumDriver<MobileElement> driver, DesiredCapabilities caps)
 	{
+		
+		//receiving virtual call from 8586037334
+		
 		System.out.println("starting MO call method");
-		//wait time set to 45 seconds
-		WebDriverWait wait = new WebDriverWait(driver, 40);
+		//wait time set to 30 seconds
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 	
 	
 		//launch phone dialer
@@ -184,7 +187,7 @@ public class DialerMOCallStorm {
 		// tap on add call button
 		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"Add call\")")).click();
 
-		
+		/*
 		//calling automated script number
 		//Dial second MO support
 		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"1\")")).click();
@@ -198,8 +201,23 @@ public class DialerMOCallStorm {
 		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"0\")")).click();
 		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"5\")")).click();
 		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"0\")")).click();
-		driver.findElement(By.id("com.android.contacts:id/btnLogsCall")).click();
+		driver.findElement(By.id("com.android.contacts:id/btnLogsCall")).click();		
 		
+		*/
+		
+		
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"1\")")).click();
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"9\")")).click();
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"0\")")).click();
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"9\")")).click();
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"3\")")).click();
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"9\")")).click();
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"0\")")).click();
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"0\")")).click();
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"0\")")).click();
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"0\")")).click();
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"3\")")).click();
+		driver.findElement(By.id("com.android.contacts:id/btnLogsCall")).click();
 		
 		
 		//Wait for 2nd MO call to connect. Waiting 45 seconds for merge to appear
