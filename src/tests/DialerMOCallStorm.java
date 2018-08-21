@@ -47,7 +47,7 @@ public class DialerMOCallStorm {
 			caps.setCapability("deviceName", "My Phone");
 			
 			//Phone id acquired through ADB
-			caps.setCapability("udid", "LMV405UAe4c83622"); 
+			caps.setCapability("udid", "LMV405UA1ab6ecf6"); 
 			caps.setCapability("platformName", "Android");
 			caps.setCapability("platformVersion", "8.1.0");
 			
